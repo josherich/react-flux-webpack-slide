@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>React.js, Flux and more</h2>
+					<h3>component thinking</h3>
+					<p>
+						<small>Created by <a href="http://chenhf.com">@josherich</a></small>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Framework</h2>
+						<p>
+							What does Framework solve exactly?
+						</p>
+
+						<pre><code data-trim contenteditable>
+// is this really
+app.config(function (provider) {
+	provider.setConfig('_config');
+});
+
+// better than this?
+app.config = require('./config');
+					</code></pre>
+					</section>
+					<section>
+						<h2>Framework</h2>
+						<p>
+							What does Framework solve exactly?
+						</p>
+						<p>
+							Except creating tons of terms.
+						</p>
+						<hr>
+						<p>
+							model, collection, view, behavior, controller, Region ...
+						</p>
+					</section>
+
+				</section>
+
+
+
+				<section>
+					<h2>React</h2>
+					<a class="test" href="http://facebook.github.io/react/index.html">
+						<img width="160" height="160" src="./logo.svg" alt="React.js">
+					</a>
+					<p>
+						Web Component Done Right.
+					</p>
+					<p>
+						<a href="http://facebook.github.io/react/index.html" target="_blank">React.js</a>
+					</p>
+				</section>
+
+				<section>
+					<h2>React</h2>
+					<ul>
+						<li>
+							Just a Library
+						</li>
+						<li>
+							Just about UI
+						</li>
+						<li>
+							Use it as a Plugin
+						</li>
+					</ul>
+
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Learn React in 1 min</h2>
+						<pre>
+							<code data-trim>
+var React = require('react');
+var Democracy = React.createClass({
+	//component attributes
+	render: function() {
+		console.log(this.props.name);
+		return (<p>Hello Freedom</p>)
+	}
+});
+module.exports = Democracy;
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>
+							&lt; Democracy name='Hong Kong'/&gt;
+						</p>
+						<pre>
+							<code data-trim>
+var React = require('react');
+var Democracy = React.createClass({
+	//component attributes
+	render: function() {
+		console.log(this.props.name);
+		return (<p>Hello Freedom</p>)
+	}
+});
+module.exports = Democracy;
+
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h3>
+							render() fire when state change
+						</h3>
+						<pre>
+							<code>
+var Democracy = React.createClass({
+	getInitialState: function() {
+		return {isDemocracy: true};
+	},
+
+	componentDidMount: function() {
+		this.setState({isDemocracy: false});
+	},
+
+	componentWillUnmount: function() {
+	},
+
+	render: function() {
+		console.log(this.props.name);
+		console.log(this.state.isDemocracy);
+		return (<p onClick={this._onClick}>Hello Freedom</p>)
+	},
+
+	_onClick: function() {}
+});
+module.exports = Democracy;
+							</code>
+						</pre>
+					</section>
+
+
+				</section>
+
+				<section>
+					<h2>Key Concepts</h2>
+					<ul>
+						<li>immutable: this.props.</li>
+						<li>mutable: this.state.</li>
+						<li>reference: this.refs.</li>
+					</ul>
+					<hr>
+					<p>
+						immutable is eval
+					</p>
+				</section>
+
+				<section>
+					<h2>DOM Free, it's Virtual DOM</h2>
+					<p>Diff Virtual DOM tree</p>
+					<p>Think Virtual DOM as Version Control of DOM. -AdonisSMU</p>
+				</section>
+
+				<section>
+					<h2>work with MVC</h2>
+					<pre><code>
+var SimpleModel = Backbone.Model.extend({});
+
+var view = React.createClass({
+	mixins: [BackboneMixin],
+});
+
+var myModel = new SimpleModel();
+
+&lt;Comment model={myModel} /&gt;
+&lt;button onClick={function() {myModel.set("comment", "This is an comment!");}}&gt;
+					</code>
+					</pre>
+
+				</section>
+
+				<section>
+					<h2>Data - DOM</h2>
+					<img src="point-to-point.gif" alt="">
+					<img src="hub-and-spoke.gif" alt="">
+				</section>
+
+				<section>
+					<h3>Democracy is broken, Autocracy is awesome.</h3>
+					<img src="hub-and-spoke.gif" alt="">
+				</section>
+
+				<section>
+					<h2>Flux</h2>
+					<img src="./flux-diagram-white-background.png" alt="">
+				</section>
+
+				<section>
+					<section>
+						<h2>Flux</h2>
+						<p>
+							║ View ║
+						</p>
+						<p>
+							║ Actions ║ -> ║ API Actions ║ -> ║ Dispatcher ║ -> ║ Store ║
+						</p>
+						<p>
+							║ View ║
+						</p>
+					</section>
+					<section>
+						<h2>Actions</h2>
+						<pre><code>
+var payload = {
+  type: key,
+  data: response
+};
+Dispatcher.handleAction(payload);
+
+						</code></pre>
+					</section>
+					<section>
+						<h2>Dispatcher</h2>
+						<pre><code>
+handleAction: function() {
+	var payload = {
+	  source: PayloadSources.SERVER_ACTION,
+	  action: action
+	};
+	this.dispatch(payload);
+}
+
+						</code></pre>
+					</section>
+					<section>
+						<h2>Stores</h2>
+						<pre><code>
+Dispatcher.register(function(payload) {
+	switch(type)
+		case a:
+			this.emit('change');
+});
+						</code></pre>
+					</section>
+
+				</section>
+
+				<section>
+					<h2>Reflux</h2>
+					<p>
+						║ Actions ║ ─> ║ Stores ║ ─> ║ View Components ║
+					</p>
+					<p>
+						└──────────────┘
+					</p>
+					<p>
+						Nested Actions, Nested Stores
+					</p>
+					<p>
+						You're listening to a data stream.
+					</p>
+					<p>
+						merge, filter, reduce
+					</p>
+
+				</section>
+
+				<section>
+					<h2>Webpack</h2>
+					<img src="./what-is-webpack.png" alt="" style="background: white;">
+				</section>
+
+				<section>
+					<section>
+						<h2>Code Splitting</h2>
+						<pre><code>
+module.exports = {
+  entry: {
+    Profile: './profile.js',
+    Feed: './feed.js'
+  },
+  output: {
+    path: 'build',
+    filename: '[name].js' // Template based on keys in entry above
+  }
+};
+						</code></pre>
+					</section>
+					<section>
+						<h2>optimize common code</h2>
+						<pre><code>
+module.exports = {
+    entry: {
+        pageA: "./pageA",
+        pageB: "./pageB",
+        pageC: "./pageC",
+        adminPageA: "./adminPageA",
+        adminPageB: "./adminPageB",
+        adminPageC: "./adminPageC",
+    },
+    output: {
+        path: path.join(__dirname, "js"),
+        filename: "[name].js"
+    },
+    plugins: [
+        new CommonsChunkPlugin("admin-commons.js", ["adminPageA", "adminPageB"]),
+        new CommonsChunkPlugin("commons.js", ["pageA", "pageB", "admin-commons.js"], 2),
+        new CommonsChunkPlugin("c-commons.js", ["pageC", "adminPageC"]),
+    ]
+}
+						</code></pre>
+					</section>
+					<section>
+						<h2>Loaders</h2>
+						<pre><code>
+// inline style
+require('./sytle.scss');
+// inline template
+require('./template.jade');
+
+{
+    module: {
+        loaders: [
+            { test: /\.jade$/, loader: "jade" },
+            // => "jade" loader is used for ".jade" files
+
+            { test: /\.css$/, loader: "style!css" },
+            // => "style" and "css" loader is used for ".css" files
+            // Alternative syntax:
+            { test: /\.css$/, loaders: ["style", "css"] },
+        ]
+    }
+}
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>
+							Async Loading
+						</h2>
+						<pre><code>
+if (window.location.pathname === '/feed') {}
+  showLoadingState();
+  require.ensure([], function() { // this syntax is weird but it works
+    hideLoadingState();
+    require('./feed').show(); // when this function is called, the module is guaranteed to be synchronously available.
+  });
+} else if (window.location.pathname === '/profile') {
+  showLoadingState();
+  require.ensure([], function() {
+    hideLoadingState();
+    require('./profile').show();
+  });
+}
+						</code></pre>
+					</section>
+
+				</section>
+
+				<section>
+					<h2>Resources</h2>
+					<p><a href="https://github.com/enaqx/awesome-react">awesome-react</a></p>
+					<p><a href="https://github.com/facebook/react/wiki/Complementary-Tools#jsx-integrations">React wiki</a></p>
+					<p><a href="http://webpack.github.io/docs/what-is-webpack.html">Webpack</a></p>
+					<p>
+
+					</p>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
